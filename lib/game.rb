@@ -72,6 +72,7 @@ class Game
       puts "Qwerty wins!"
       exit
     end
+    puts "Qwerty is out of guesses! You win!"
   end
 
   def generate_computer_guess
