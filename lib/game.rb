@@ -8,6 +8,7 @@ class Game
     @secret_code = Code.new
     @player = Player.new
     @turns_remaining = 12
+    @payer_role = @player.choose_role
   end
 
   def play_game
