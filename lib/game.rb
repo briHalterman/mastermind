@@ -37,6 +37,7 @@ class Game
     else
       puts "You have #{result[:exact]} exact match(es)."
       puts "You have #{result[:partial]} partial match(es)."
+      puts "You have #{@turns_remaining - 1} turns remaining."
     end
   end
 end
