@@ -21,6 +21,12 @@ class Game
 
   def play_round
     guess = @player.get_guess
+
+    unless Code.valid_code?(guess)
+      puts "Invalid guess. Please try again."
+      return
+    end
+
     puts "You guessed: #{guess.join(', ')}"
   end
 end
