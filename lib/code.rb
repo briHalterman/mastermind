@@ -32,9 +32,25 @@ class Code
     guess.each_with_index do |color, index|
       if color == @secret_code[index]
         exact_matches += 1
+        guess[index] = nil
+      end
+
+    end
+
+    secret_copy = @secret_code.map { |color| color }
+
+    guess.each do |color|
+      if color.nil?
+        next
+      end
+
+      if secret_copy.include?(color)
+        partial_matches += 1
+        secret_copy[secret_copy.index(color)] = nil
       end
     end
 
-    puts "You have #{exact_matches} exact matches"
+    puts "You have #{exact_matches} exact matches."
+    puts "You have #{partial_matches} partial matches."
   end
 end
