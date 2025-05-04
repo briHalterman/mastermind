@@ -33,6 +33,7 @@ class Game
 
     if result == :win
       puts "Congratulations! You Win!"
+      exit
     else
       puts "You have #{result[:exact]} exact match(es)."
       puts "You have #{result[:partial]} partial match(es)."
