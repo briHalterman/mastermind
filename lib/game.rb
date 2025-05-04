@@ -13,14 +13,22 @@ class Game
 
   def play_game
     puts "Welcome to Mastermind! Let's play!"
+    if @player_role == :code_breaker
+      play_as_code_breaker
+    else
+      play_as_code_maker
+    end
+  end
+
+  def play_as_code_breaker
     until @turns_remaining == 0
-      play_round
+      play_round_as_code_breaker
       @turns_remaining -= 1
     end
     puts "Game over! The code was: #{@secret_code.display}"
   end
 
-  def play_round
+  def play_round_as_code_breaker
     guess = @player.get_guess
 
     puts "You guessed: #{guess.join(', ')}"
@@ -40,5 +48,34 @@ class Game
       puts "You have #{result[:partial]} partial match(es)."
       puts "You have #{@turns_remaining - 1} turns remaining."
     end
+  end
+
+  def play_as_code_maker
+    @secret_code = @player.set_secret_code
+    until @turns_remaining == 0
+      play_round_as_code_maker
+      @turns_remaining -= 1
+    end
+  end
+
+  def play_round_as_code_maker
+    guess = generate_computer_guess
+    puts "Qwerty guesses: #{guess.join(', ')}"
+
+    puts "How many colors did Qwerty match exactly?"
+    exact_matches = gets.chomp.to_i
+
+    puts "How many matches did Qwerty guess that weren't in the correct place?"
+    partial_matches = gets.chomp.to_i
+
+    if exact_matches == 4
+      puts "Qwerty wins!"
+      exit
+    end
+    puts "Qwerty is out of guesses! You win!"
+  end
+
+  def generate_computer_guess
+    Array.new(4) {Code::COLORS.sample}
   end
 end
