@@ -28,5 +28,8 @@ class Game
     end
 
     puts "You guessed: #{guess.join(', ')}"
+
+    result = @secret_code.compare_code(guess)
+    puts result
   end
 end

@@ -4,15 +4,12 @@
 # loop through remaining guess elements to see if the are included in the secret code at all
 
 class Code
-  exact_matches = 0
-  partial_matches = 0
-
   COLORS = %w[red orange yellow green blue]
   CODE_LENGTH = 4
 
   def initialize
     @secret_code = Array.new(CODE_LENGTH) { COLORS.sample }
-    # puts "Secret code: #{@secret_code.inspect}"
+    puts "Secret code: #{@secret_code.inspect}"
   end
 
   def self.valid_code?(guess)
@@ -25,15 +22,19 @@ class Code
   end
 
   def compare_code(guess)
-    if guess == secret_code
+    exact_matches = 0
+    partial_matches = 0
+
+    if guess == @secret_code
       return "Congratulations! You Win!"
     end
 
     guess.each_with_index do |color, index|
-      if color == secret_code[index]
+      if color == @secret_code[index]
         exact_matches += 1
       end
     end
 
+    puts "You have #{exact_matches} exact matches"
   end
 end
