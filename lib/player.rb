@@ -17,7 +17,7 @@ class Player
   def set_secret_code
     input = nil
 
-    until Code.valid_code?(input)
+    until input && Code.valid_code?(input)
       puts "Choose a secret code of four colors (e.q. blue red green green):"
       input = gets.chomp.downcase.split
     end

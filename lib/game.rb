@@ -59,6 +59,22 @@ class Game
   end
 
   def play_round_as_code_maker
-    
+    guess = generate_computer_guess
+    puts "Qwerty guesses: #{guess.join(', ')}"
+
+    puts "How many colors did Qwerty match exactly?"
+    exact_matches = gets.chomp.to_i
+
+    puts "How many matches did Qwerty guess that weren't in the correct place?"
+    partial_matches = gets.chomp.to_i
+
+    if exact_matches == 4
+      puts "Qwerty wins!"
+      exit
+    end
+  end
+
+  def generate_computer_guess
+    Array.new(4) {Code::COLORS.sample}
   end
 end
