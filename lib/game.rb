@@ -22,14 +22,20 @@ class Game
   def play_round
     guess = @player.get_guess
 
+    puts "You guessed: #{guess.join(', ')}"
+
     unless Code.valid_code?(guess)
       puts "Invalid guess. Please try again."
       return
     end
 
-    puts "You guessed: #{guess.join(', ')}"
-
     result = @secret_code.compare_code(guess)
-    puts result
+
+    if result == :win
+      puts "Congratulations! You Win!"
+    else
+      puts "You have #{result[:exact]} exact match(es)."
+      puts "You have #{result[:partial]} partial match(es)."
+    end
   end
 end

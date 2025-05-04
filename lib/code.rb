@@ -26,7 +26,7 @@ class Code
     partial_matches = 0
 
     if guess == @secret_code
-      return "Congratulations! You Win!"
+      return :win
     end
 
     guess.each_with_index do |color, index|
@@ -50,7 +50,6 @@ class Code
       end
     end
 
-    puts "You have #{exact_matches} exact matches."
-    puts "You have #{partial_matches} partial matches."
+    { exact: exact_matches, partial: partial_matches }
   end
 end
