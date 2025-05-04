@@ -9,7 +9,7 @@ class Code
 
   def initialize
     @secret_code = Array.new(CODE_LENGTH) { COLORS.sample }
-    puts "Secret code: #{@secret_code.inspect}"
+    # puts "Secret code: #{@secret_code.inspect}"
   end
 
   def self.valid_code?(guess)

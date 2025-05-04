@@ -12,14 +12,22 @@ class Game
 
   def play_game
     puts "Welcome to Mastermind! Let's play!"
+    if @player_role == :code_breaker
+      play_as_code_breaker
+    else
+      play_as_code_maker
+    end
+  end
+
+  def play_as_code_breaker
     until @turns_remaining == 0
-      play_round
+      play_round_as_code_breaker
       @turns_remaining -= 1
     end
     puts "Game over! The code was: #{@secret_code.display}"
   end
 
-  def play_round
+  def play_round_as_code_breaker
     guess = @player.get_guess
 
     puts "You guessed: #{guess.join(', ')}"
@@ -39,5 +47,17 @@ class Game
       puts "You have #{result[:partial]} partial match(es)."
       puts "You have #{@turns_remaining - 1} turns remaining."
     end
+  end
+
+  def play_as_code_maker
+    @secret_code = @player.set_secret_code
+    until @turns_remaining == 0
+      play_round_as_code_maker
+      @turns_remaining -= 1
+    end
+  end
+
+  def play_round_as_code_maker
+    
   end
 end
